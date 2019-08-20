@@ -1,5 +1,3 @@
-
-
 my_name = "almazkun"
 my_age = 32
 my_height = 175

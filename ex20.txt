@@ -1,0 +1,5 @@
+Jupyter Server URI: http://localhost:8888/?token=042e78a8215d418c0358bd4e15e9bcd239747639dda2f00d
+Python version:
+3.7.3 (default, Apr 24 2019, 15:29:51) [MSC v.1915 64 bit (AMD64)]
+(6, 0, 0)
+C:\\Users\\Home\\Anaconda3\\python.exe

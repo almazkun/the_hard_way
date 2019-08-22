@@ -1,0 +1,1 @@
+Include how exactly you are calling your script. The way you are describing the error I understand that you are getting the username from the command line and from an input call. Why both?

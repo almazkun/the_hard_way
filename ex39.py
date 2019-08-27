@@ -28,38 +28,38 @@ print("There is a city {} in RU".format(cities["RU"]))
 
 
 # Print some countries
-print("-_- " * 10)
+print("-_- " * 20)
 print("Abbraviation for Turkey: {}".format(countries["Turkey"]))
 print("Abbraviation for Germany: {}".format(countries["Germany"]))
 
 
 # Print cities in counties
-print("-_- " * 10)
+print("-_- " * 30)
 print("There is a city {} in Turkey".format(cities[countries["Turkey"]]))
-print("There is a city {} in RU".format(cities[countries["Russia"]]))
+print("There is a city {} in Russia".format(cities[countries["Russia"]]))
 
 
 # List all abbreviations
-print("-_- " * 10)
+print("-_- " * 40)
 for country, abbr in countries.items():
     print("{} for {}".format(country, abbr))
 
 
 # List of all cities
-print("-_- " * 10)
+print("-_- " * 50)
 for abbr, city in cities.items():
     print("In {} is {}.".format(abbr, city))
 
 
 # Now both 
-print("-_- " * 10)
+print("-_- " * 60)
 for country, abbr in countries.items():
     print("Country {} has an abbr {} and city {}.".format(country, abbr, cities[abbr]))
 
 
-print("-_- " * 10)
+print("-_- " * 70)
 # Safe method to get an abbr
-#country - countries.get("US", None)
+country = countries.get("US")
 
 
 if not country:
@@ -69,7 +69,3 @@ if not country:
 # Printing  city with argument by default
 city = cities.get("US", "do not exist")
 print("In US is a city {}.".format(city))
-
-
-
-

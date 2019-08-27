@@ -1,5 +1,7 @@
 print("Lets have some practice")
-print("You need to know about special caracter \\, whish \ncontrol lines, and \ttabulations")
+print(
+    "You need to know about special caracter \\, whish \ncontrol lines, and \ttabulations"
+)
 
 
 poem = """

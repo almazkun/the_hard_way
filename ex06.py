@@ -1,7 +1,7 @@
 x = "There are {} types of people.".format(10)
 binary = "Python"
 do_not = "don't"
-y = "Those who understand {} and who {}.".format(binary,do_not)
+y = "Those who understand {} and who {}.".format(binary, do_not)
 
 print(x)
 print(y)

@@ -10,24 +10,24 @@ def gold_room():
         how_much = int(next)
     else:
         daed("You need inter a number")
-    
 
     if how_much < 50:
         print("Wonderful! You can take it home!")
         exit(0)
     else:
         dead("You greedy bastard!")
-    
+
 
 def bear_room():
-    print("""
+    print(
+        """
     Room of Sleeping Bear is upon you to enjoy.
     Sleeping bear is blocking the exit door.
     What are you going to do? 
     Poke a bear or take away honey?
-    """)
+    """
+    )
     bear_moves = False
-
 
     while True:
         next = input("> ")
@@ -35,10 +35,12 @@ def bear_room():
         if next == "Take away honey":
             dead("Bear had eaten your head.")
         elif next == "Poke a bear" and not bear_moves:
-            print("""
+            print(
+                """
             Bear opened the door.
             Poke a bear or enter the door?
-            """)
+            """
+            )
             bear_moves = True
         elif next == "Poke a bear" and bear_moves:
             dead("You pissed of the bear and it eats you!")
@@ -49,20 +51,21 @@ def bear_room():
 
 
 def chtulhu_room():
-    print("""
+    print(
+        """
     You are on the edge of the abbysse!
     Run away or eat your own head?
-    """)
+    """
+    )
     next = input("> ")
-
 
     if "away" in next:
         start()
-    elif"head" in next:
+    elif "head" in next:
         dead("Its seems like you have eaten your own head.")
     else:
         chtulhu_room()
-    
+
 
 def dead(why):
     print(why, "Wonderful!")
@@ -70,13 +73,14 @@ def dead(why):
 
 
 def start():
-    print("""
+    print(
+        """
     You are in Dark Room of choislessness.
     You are faced with two doors. 
     Which one you choose? Left or right?
-    """)
+    """
+    )
     next = input("> ")
-
 
     if "eft" in next:
         bear_room()

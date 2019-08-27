@@ -17,6 +17,7 @@ def divide(a, b):
     print("Dividing {} / {}".format(a, b))
     return a / b
 
+
 print("Let's make some calculations\n")
 age = add(30, 7)
 height = subtrackt(190, 4)
@@ -24,7 +25,11 @@ weight = multiply(35, 2)
 iq = divide(220, 2)
 
 
-print("Age: {} years, height: {} santimetres, weight: {} kilograms, iq: {} or negligible.\n".format(age, height, weight, iq))
+print(
+    "Age: {} years, height: {} santimetres, weight: {} kilograms, iq: {} or negligible.\n".format(
+        age, height, weight, iq
+    )
+)
 
 
 print("It is interesting: ")

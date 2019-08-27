@@ -32,4 +32,3 @@ if people <= dogs:
 
 if people == dogs:
     print("Equal")
-    

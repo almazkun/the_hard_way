@@ -13,7 +13,7 @@ PHRASES = {
     "class %%%(object):\n\tdef __init__ (self, ***) ":
     "Class %%% combines __init__ with self, *** parameter.",
     "class %%%(object):\n\tdef ***(self, @@@) ":
-    "Class %%% combines function *** with self, @@ parameter.",
+    "Class %%% combines function *** with self, @@@ parameter.",
     "*** = %%%() ":
     "Initialize *** as %%% class instance.",
     "***.***(@@@) ":

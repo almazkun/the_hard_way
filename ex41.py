@@ -8,18 +8,12 @@ WORDS = []
 
 
 PHRASES = {
-    "class %%%(%%%):":
-    "Creates class %%%, inherited from %%%.",
-    "class %%%(object):\n\tdef __init__ (self, ***) ":
-    "Class %%% combines __init__ with self, *** parameter.",
-    "class %%%(object):\n\tdef ***(self, @@@) ":
-    "Class %%% combines function *** with self, @@@ parameter.",
-    "*** = %%%() ":
-    "Initialize *** as %%% class instance.",
-    "***.***(@@@) ":
-    "From *** function *** taken and self, @@@ parameter.",
-    "***.*** = '***'":
-    "From *** attribute *** taken and set to '***'."
+    "class %%%(%%%):": "Creates class %%%, inherited from %%%.",
+    "class %%%(object):\n\tdef __init__ (self, ***) ": "Class %%% combines __init__ with self, *** parameter.",
+    "class %%%(object):\n\tdef ***(self, @@@) ": "Class %%% combines function *** with self, @@@ parameter.",
+    "*** = %%%() ": "Initialize *** as %%% class instance.",
+    "***.***(@@@) ": "From *** function *** taken and self, @@@ parameter.",
+    "***.*** = '***'": "From *** attribute *** taken and set to '***'.",
 }
 
 
@@ -29,7 +23,7 @@ if len(sys.argv) == 2 and sys.argv[1] == "russian":
     PHRASE_FIRST = True
 
 
-# download words 
+# download words
 for word in urlopen(WORD_URL).readlines():
     WORDS.append(word.strip().decode("utf-8"))
 

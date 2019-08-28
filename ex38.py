@@ -7,11 +7,15 @@ stuff = ten_things.split(" ")
 more_stuff = ["Day", "Night", "Song", "Flisbee", "Corn", "Banana", "Girl", "Boy"]
 
 
-while len(stuff)!= 10:
+while len(stuff) != 10:
     next_one = more_stuff.pop()
     print("Add: {}".format(next_one))
     stuff.append(next_one)
-    print("This is what we have now: {}, and number of objects are {}".format(stuff, len(stuff)))
+    print(
+        "This is what we have now: {}, and number of objects are {}".format(
+            stuff, len(stuff)
+        )
+    )
 
 
 print("This is what we have in the end: {}".format(stuff))

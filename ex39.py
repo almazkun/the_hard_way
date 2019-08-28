@@ -9,11 +9,7 @@ countries = {
 
 
 # Some Citis of Countries
-cities = {
-    "UZ": "Zaravshan",
-    "TR": "Antalya",
-    "DE": "Minhen",
-}
+cities = {"UZ": "Zaravshan", "TR": "Antalya", "DE": "Minhen"}
 
 
 # Adding some cities
@@ -51,7 +47,7 @@ for abbr, city in cities.items():
     print("In {} is {}.".format(abbr, city))
 
 
-# Now both 
+# Now both
 print("-_- " * 60)
 for country, abbr in countries.items():
     print("Country {} has an abbr {} and city {}.".format(country, abbr, cities[abbr]))

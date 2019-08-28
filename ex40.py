@@ -1,23 +1,20 @@
-class Song():
+class Song:
     def __init__(self, lyrics):
         self.lyrics = lyrics
-
 
     def sing_me_a_song(self):
         for line in self.lyrics:
             print(line)
-    
-
-happy_bday = Song(["Happy bithday to you",
-                    "Happy birthday to you!",
-                    "Dear you happy birthday!"
-                    ])
 
 
-bulls_on_parade = Song(["Bulls are comming!",
-                        "They are all are almost here!",
-                        "Beware!"
-                        ])
+happy_bday = Song(
+    ["Happy bithday to you", "Happy birthday to you!", "Dear you happy birthday!"]
+)
+
+
+bulls_on_parade = Song(
+    ["Bulls are comming!", "They are all are almost here!", "Beware!"]
+)
 
 
 happy_bday.sing_me_a_song()

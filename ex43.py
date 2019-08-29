@@ -76,12 +76,12 @@ class LaserWeaponArmory(Scene):
     def enter(self):
         print(
             """
-    You are entering Armory. It is dead quit inside. 
-    You run to the secret loker room. It is where the Neutron bomb is hidden.
-    You found the box with the bomb! But it is locked!
-    You need to enter 3 digit code to open it.
-    Be carefull after 10 wrong entrings box will be locked forever!
-    Good luck to you me lucky guesser! 
+        You are entering Armory. It is dead quit inside. 
+        You run to the secret loker room. It is where the Neutron bomb is hidden.
+        You found the box with the bomb! But it is locked!
+        You need to enter 3 digit code to open it.
+        Be carefull after 10 wrong entrings box will be locked forever!
+        Good luck to you me lucky guesser! 
             """
         )
         code = "{}{}{}".format(randint(0,9), randint(0,9), randint(0,9))
@@ -100,10 +100,10 @@ class LaserWeaponArmory(Scene):
         )
         guesses = 0
 
-        while guess!= code and guesses < 10:
+        while guess!= code and guesses < 9:
             print("Piii piii piii Wrong Code!")
             guesses += 1
-            print(10 - guesses, "left")
+            print(9 - guesses, "left")
             input("""
             | 7 | 8 | 9 | 
             --- --- --- 
@@ -122,23 +122,74 @@ class LaserWeaponArmory(Scene):
             print("Box opens with pleasent fuushing sound")
             print(
             """
-    Luck is on our side today!
-    You grab the bomb and run to the most vulnerable place of the battleship.
+        Luck is on our side today!
+        You grab the bomb and run to the most vulnerable place of the battleship.
             """
-        )
-        return "TheFuelCell()"
+            )
+            return "TheFuelCell()"
+        else:
+            print("""
+        You hear the last error message and see the melting of the lock. 
+        Neutron bomb is forever safe in the unopenanable box.
+        You lost in despair in your battleship and met your death there when God exploded it.
+            """
+            )
+            return "Death()"
 
 
 class TheFuelCell(Scene):
     def enter(self):
-        pass
+        print("""
+        You run into Fuel Cell room and see 5 Gods There. 
+        They all see you and Neutron bomb. 
+        They are unsure and motionless.
+        What will you do?
+        """)
+        print("\n")
+        print("What will you do?")
+        action = input("===>")
+
+        if "run away" in action:
+            print("You try to run away, but they shoot you in the back")
+            return "Death()"
+        elif "setup" in action:
+            print("You setup bomb in the Fuel Cell and run to the Escape Pods")
+            return "EscapePod()"
+        else:
+            print("Hm, smart, but not enought. Try something better this time.")
+            return "TheFuelCell()"
 
 
 class EscapePod(Scene):
     def enter(self):
-        pass
+        print("""
+        You have run up to Escape pods. 
+        You know that some of them have been demaged in the battle with Gots and will explode after start!
+        You have no time to check them all. You neet to guess on and pray for the luck!
+        """)
+        good_pod = randint(1, 5)
+        print("Which one will you chose")
+        guess = input("""
+            | 1 | 2 | 3 | 4 | 5 |
+            _____________________
+            | * |>
+            """ 
+        )
+
+        if int(guess)!= good_pod:
+            print("""
+        You choose {}, but should have choosen {}
+            """.format(guess, good_pod))
+            return "Death()"
+        else:
+            print("You won!")
+            return "Finished()"
 
 
+class Finished(Scene):
+    def enter(self):
+        print("You Won! Congratulations!")
+        return "Finished()"
 class Map:
     def __init__(self, start_scene):
         pass
@@ -154,5 +205,5 @@ a_map = Map("central_corridor")
 a_game = Engine(a_map)
 a_game.play
 
-a = LaserWeaponArmory()
+a = EscapePod()
 a.enter()

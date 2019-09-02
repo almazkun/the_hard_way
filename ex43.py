@@ -15,6 +15,7 @@ class Engine:
 
     def play(self):
         current_scene = self.scene_map.opening_scene()
+        last_scene = self.scene_map.next_scene("finished")
 
         while current_scene != last_scene:
             next_scene_name = current_scene.enter()
@@ -53,23 +54,23 @@ class CentralCorridor(Scene):
             print(
                 "He is too small and lurky. You try to hit him but all shoots are missed. And Got is head shotted you!"
             )
-            return "Death()"
+            return "death"
 
         elif "run" in action:
             print(
                 "You try to run faster and bypass him from the right. But this what he was waiting for. He headshooted you!"
             )
-            return "Death()"
+            return "death"
 
         elif "joke" in action:
             print(
                 "You know Gots very well and you know that you can make them laugh. You make a choke and Gots starts to laugh very hard and shoot him in the head and turn to the Laboratory."
             )
-            return "LaserWeaponArmory()"
+            return "laser_weapon_armory"
 
         else:
             print("Hm, smart but not enought. Try again.")
-            return "CentralCorridor()"
+            return "central_corridor"
 
 
 class LaserWeaponArmory(Scene):
@@ -126,7 +127,7 @@ class LaserWeaponArmory(Scene):
         You grab the bomb and run to the most vulnerable place of the battleship.
             """
             )
-            return "TheFuelCell()"
+            return "the_fuel_cell"
         else:
             print("""
         You hear the last error message and see the melting of the lock. 
@@ -134,7 +135,7 @@ class LaserWeaponArmory(Scene):
         You lost in despair in your battleship and met your death there when God exploded it.
             """
             )
-            return "Death()"
+            return "death"
 
 
 class TheFuelCell(Scene):
@@ -151,13 +152,13 @@ class TheFuelCell(Scene):
 
         if "run away" in action:
             print("You try to run away, but they shoot you in the back")
-            return "Death()"
+            return "death"
         elif "setup" in action:
             print("You setup bomb in the Fuel Cell and run to the Escape Pods")
-            return "EscapePod()"
+            return "escape_pod"
         else:
             print("Hm, smart, but not enought. Try something better this time.")
-            return "TheFuelCell()"
+            return "the_fuel_cell"
 
 
 class EscapePod(Scene):
@@ -169,6 +170,7 @@ class EscapePod(Scene):
         """)
         good_pod = randint(1, 5)
         print("Which one will you chose")
+        print(good_pod)
         guess = input("""
             | 1 | 2 | 3 | 4 | 5 |
             _____________________
@@ -180,30 +182,45 @@ class EscapePod(Scene):
             print("""
         You choose {}, but should have choosen {}
             """.format(guess, good_pod))
-            return "Death()"
+            return "death"
         else:
             print("You won!")
-            return "Finished()"
+            return "finished"
 
 
 class Finished(Scene):
     def enter(self):
         print("You Won! Congratulations!")
-        return "Finished()"
+        return "finished"
+
+
 class Map:
+
+
+    scenes = {
+        "central_corridor": CentralCorridor(),
+        "laser_weapon_armory": LaserWeaponArmory(),
+        "the_fuel_cell": TheFuelCell(),
+        "escape_pod": EscapePod(),
+        "death": Death(),
+        "finished": Finished(),
+    }
+
+
     def __init__(self, start_scene):
-        pass
+        self.start_scene = start_scene
+
 
     def next_scene(self, scene_name):
-        pass
+        val = Map.scenes.get(scene_name)
+        return val
+
 
     def opening_scene(self):
-        pass
+        return self.next_scene(self.start_scene)
+
 
 
 a_map = Map("central_corridor")
 a_game = Engine(a_map)
-a_game.play
-
-a = EscapePod()
-a.enter()
+a_game.play()

@@ -1,6 +1,4 @@
-class Parent():
-
-
+class Parent:
     def implicit(self):
         print("PARENT implicit() ")
 
@@ -13,16 +11,12 @@ Parent().implicit()
 Child().implicit()
 
 
-class ParentOver():
-
-
+class ParentOver:
     def override(self):
         print("PARENT override() ")
 
 
 class ChildOver(ParentOver):
-
-
     def override(self):
         print("CHILD override() ")
 
@@ -31,16 +25,12 @@ ParentOver().override()
 ChildOver().override()
 
 
-class ParentSuper():
-
-
+class ParentSuper:
     def altered(self):
         print("PARENT altered() ")
 
 
 class ChildSuper(ParentSuper):
-
-
     def altered(self):
         print("CHILD, BEFORE PARENT altered() ")
         super(ChildSuper, self).altered()
@@ -51,32 +41,24 @@ ParentSuper().altered()
 ChildSuper().altered()
 
 
-class ParentSupreme():
-
-
+class ParentSupreme:
     def override(self):
         print("ParentSupreme override() ")
 
-    
     def implicit(self):
         print("ParentSupreme implicit() ")
-
 
     def altered(self):
         print("ParentSupreme altered() ")
 
 
 class ChildSupreme(ParentSupreme):
-
-
     def override(self):
         print("ChildSupreme override() ")
 
-    
     def implicit(self):
         print("ChildSupreme implicit() ")
 
-    
     def altered(self):
         super(ChildSupreme, self).altered()
 
@@ -94,15 +76,42 @@ ParentSupreme().altered()
 ChildSupreme().altered()
 
 
-print("\n\t WTF?")
-
-
-class Other():
-
+class Other:
     def override(self):
         print("OTHER override() ")
 
+    def implicit(self):
+        print("OTHER implicit() ")
+
+    def altered(self):
+        print("OTHER altered() ")
+
+
+class ChildOther(Other):
+    def __init__(self):
+        self.other = Other()
 
     def implicit(self):
-        
+        self.other.implicit()
 
+    def override(self):
+        print("CHILDOTHER override() ")
+
+    def altered(self):
+        print("CHILDOTHER, before Other altered() ")
+        self.other.altered()
+        print("CHILDOTHER, after Other altered() ")
+
+
+father = Other()
+son = ChildOther()
+
+print("\n\t WTF?")
+father.implicit()
+father.override()
+father.altered()
+
+print("\n\t WTF?")
+son.implicit()
+son.override()
+son.altered()

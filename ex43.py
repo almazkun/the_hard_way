@@ -85,9 +85,10 @@ class LaserWeaponArmory(Scene):
         Good luck to you me lucky guesser! 
             """
         )
-        code = "{}{}{}".format(randint(0,9), randint(0,9), randint(0,9))
+        code = "{}{}{}".format(randint(0, 9), randint(0, 9), randint(0, 9))
         print(code)
-        guess = input("""
+        guess = input(
+            """
             | 7 | 8 | 9 | 
             --- --- --- 
             | 4 | 5 | 6 |
@@ -97,15 +98,16 @@ class LaserWeaponArmory(Scene):
             | 0 | open> |
             _____________
             | * | * | * | >
-            """ 
+            """
         )
         guesses = 0
 
-        while guess!= code and guesses < 9:
+        while guess != code and guesses < 9:
             print("Piii piii piii Wrong Code!")
             guesses += 1
             print(9 - guesses, "left")
-            input("""
+            input(
+                """
             | 7 | 8 | 9 | 
             --- --- --- 
             | 4 | 5 | 6 |
@@ -115,21 +117,22 @@ class LaserWeaponArmory(Scene):
             | 0 | open> |
             _____________
             | * | * | * | >
-            """ 
+            """
             )
 
         if guess == code:
             print("FUUUUUUSSSSSSHHHHHHsssss")
             print("Box opens with pleasent fuushing sound")
             print(
-            """
+                """
         Luck is on our side today!
         You grab the bomb and run to the most vulnerable place of the battleship.
             """
             )
             return "the_fuel_cell"
         else:
-            print("""
+            print(
+                """
         You hear the last error message and see the melting of the lock. 
         Neutron bomb is forever safe in the unopenanable box.
         You lost in despair in your battleship and met your death there when God exploded it.
@@ -140,12 +143,14 @@ class LaserWeaponArmory(Scene):
 
 class TheFuelCell(Scene):
     def enter(self):
-        print("""
+        print(
+            """
         You run into Fuel Cell room and see 5 Gods There. 
         They all see you and Neutron bomb. 
         They are unsure and motionless.
         What will you do?
-        """)
+        """
+        )
         print("\n")
         print("What will you do?")
         action = input("===>")
@@ -163,25 +168,32 @@ class TheFuelCell(Scene):
 
 class EscapePod(Scene):
     def enter(self):
-        print("""
+        print(
+            """
         You have run up to Escape pods. 
         You know that some of them have been demaged in the battle with Gots and will explode after start!
         You have no time to check them all. You neet to guess on and pray for the luck!
-        """)
+        """
+        )
         good_pod = randint(1, 5)
         print("Which one will you chose")
         print(good_pod)
-        guess = input("""
+        guess = input(
+            """
             | 1 | 2 | 3 | 4 | 5 |
             _____________________
             | * |>
-            """ 
+            """
         )
 
-        if int(guess)!= good_pod:
-            print("""
+        if int(guess) != good_pod:
+            print(
+                """
         You choose {}, but should have choosen {}
-            """.format(guess, good_pod))
+            """.format(
+                    guess, good_pod
+                )
+            )
             return "death"
         else:
             print("You won!")
@@ -196,7 +208,6 @@ class Finished(Scene):
 
 class Map:
 
-
     scenes = {
         "central_corridor": CentralCorridor(),
         "laser_weapon_armory": LaserWeaponArmory(),
@@ -206,19 +217,15 @@ class Map:
         "finished": Finished(),
     }
 
-
     def __init__(self, start_scene):
         self.start_scene = start_scene
-
 
     def next_scene(self, scene_name):
         val = Map.scenes.get(scene_name)
         return val
 
-
     def opening_scene(self):
         return self.next_scene(self.start_scene)
-
 
 
 a_map = Map("central_corridor")

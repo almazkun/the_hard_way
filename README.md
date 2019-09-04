@@ -1,6 +1,6 @@
 # Learn Python the Hard Way.
 
-Sourse of the excersizes for all exersices from Zed. A. Shaw Learn Python the Hard Way.
+Sourse code for all exersices from [Zed. A. Shaw's](https://en.wikipedia.org/wiki/Zed_Shaw) [Learn Python the Hard Way](https://learnpythonthehardway.org/).
 
 ## Python 3.+ only.
 

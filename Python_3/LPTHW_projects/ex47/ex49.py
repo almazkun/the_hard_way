@@ -2,8 +2,7 @@ class ParserError(Exception):
     pass
 
 
-class Sentence():
-
+class Sentence:
     def __init__(self, subject, verb, object):
         self.subject = subject[1]
         self.verb = verb[1]
@@ -24,7 +23,7 @@ def match(word_list, expecting):
 
         if word[0] == expecting:
             return word
-        else: 
+        else:
             return None
     else:
         return None
@@ -75,7 +74,6 @@ def parse_sentance(word_list):
     elif start == "verb":
         return parse_subject(word_list, ("noun", "player"))
     else:
-        raise ParserError("Must start with Subject, Object or Verb, not with {}".format(start))
- 
-
- 
+        raise ParserError(
+            "Must start with Subject, Object or Verb, not with {}".format(start)
+        )

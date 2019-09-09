@@ -4,7 +4,6 @@ def scan(line):
     for word in words:
         type = analise(word.lower())
         result.append((type, word))
-    print(words, result)
     return result
 
 

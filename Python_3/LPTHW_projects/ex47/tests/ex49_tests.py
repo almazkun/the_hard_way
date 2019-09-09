@@ -37,7 +37,7 @@ list_len = len(global_test_lists)
 
 def test_peek():
     test_lists = deepcopy(global_test_lists)
-    
+
     for i in range(list_len):
         test_list = test_lists[i]
         expected_word = test_types[i]
@@ -55,7 +55,16 @@ def test_match():
         else:
             None
         assert_equal(match(test_list, test_type), expected_word)
-        print(i,"\ttest_list: >>", test_list, "<< test_type: >>", match(test_list, test_type), test_type,"<< \texpected_word >>", expected_word)
+        print(
+            i,
+            "\ttest_list: >>",
+            test_list,
+            "<< test_type: >>",
+            match(test_list, test_type),
+            test_type,
+            "<< \texpected_word >>",
+            expected_word,
+        )
 
     assert_equal(skip(test_objects, "direction"), "verb")
 

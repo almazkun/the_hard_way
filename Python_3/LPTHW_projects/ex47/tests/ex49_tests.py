@@ -37,6 +37,27 @@ list_len = len(global_test_lists)
 
 
 def test_peek():
+    test_object = scan("go north bear to eat princess")
+    print(test_object)
+    assert_equal(peek(test_object), "verb")
+
+
+def test_match():
+    test_object = scan("go north bear to eat princess")
+    print(test_object)
+    assert_equal(match(test_object, "verb"), ("verb", "go"))
+
+
+def test_skip():
+    test_object = scan("go")
+    print("test_object", test_object)
+    print("peek", peek(test_object))
+    print("match", match(test_object, "verb"))
+    print("skip", skip(test_object, None))
+    assert_equal(skip(test_object, ("verb", "go")), ("verb", "go"))
+
+
+def test_peek_2():
     test_lists = deepcopy(global_test_lists)
     print(test_lists)
     for i in range(list_len):
@@ -45,7 +66,7 @@ def test_peek():
         assert_equal(peek(test_list), expected_word)
 
 
-def test_match():
+def test_match_2():
     test_lists = deepcopy(global_test_lists)
     print(test_lists[0][0][0], test_lists[1])
     for i in range(list_len):
@@ -58,7 +79,7 @@ def test_match():
         assert_equal(match(test_list, test_type), expected_word)
 
 
-def test_skip():
+def test_skip_2():
     test_lists = deepcopy(global_test_lists)
     expected_lists1 = [
         scan("south"),

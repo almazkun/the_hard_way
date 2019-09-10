@@ -36,10 +36,9 @@ def skip(word_list, word_type):
 
 def parse_verb(word_list):
     skip(word_list, "stop")
-    next = peek(word_list)
 
-    if next == "noun":
-        return match(word_list, "noun")
+    if peek(word_list) == "verb":
+        return match(word_list, "verb")
     else:
         raise ParserError("Expected verb next.")
 

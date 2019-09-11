@@ -30,6 +30,7 @@ def match(word_list, expecting):
 
 
 def skip(word_list, word_type):
+    """First element of the tuple is checked if equal to the word_type, tuple element deleted"""
     while peek(word_list) == word_type:
         match(word_list, word_type)
 
@@ -58,11 +59,12 @@ def parse_object(word_list):
 def parse_subject(word_list, subj):
     verb = parse_verb(word_list)
     obj = parse_object(word_list)
+    
 
-    return Sentance(subj, verb, obj)
+    return Sentence(subj, verb, obj)
 
 
-def parse_sentance(word_list):
+def parse_sentence(word_list):
     skip(word_list, "stop")
 
     start = peek(word_list)

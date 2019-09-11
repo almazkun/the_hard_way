@@ -1,39 +1,6 @@
 from nose.tools import *
 from ex48.lexicon import *
-from copy import deepcopy
-from ex49 import *
-
-
-global_test_lists = [
-    scan("south"),
-    scan("door"),
-    scan("go"),
-    scan("to"),
-    scan("234"),
-    scan("error123"),
-    scan("the east door"),
-    scan("go to east"),
-    scan("bear go to the door"),
-    scan("the princess kill 10 bears"),
-]
-
-
-test_types = [
-    "direction",
-    "noun",
-    "verb",
-    "stop",
-    "number",
-    "error",
-    "stop",
-    "verb",
-    "noun",
-    "stop",
-    None,
-]
-
-
-list_len = len(global_test_lists)
+from ex49.parser import *
 
 
 def test_peek():
@@ -49,87 +16,98 @@ def test_match():
 
 
 def test_skip():
-    test_object = scan("go")
-    print("test_object", test_object)
-    print("peek", peek(test_object))
-    print("match", match(test_object, "verb"))
-    print("skip", skip(test_object, None))
-    assert_equal(skip(test_object, ("verb", "go")), ("verb", "go"))
+    #deleting first element
+    test_object_0 = scan("to go north")
+    skip(test_object_0, "stop")
+    assert_equal(test_object_0, scan("go north"))
 
+    #deleting only one element
+    test_object_1 = scan("asd")
+    skip(test_object_1, "error")
+    assert_equal(test_object_1, [])
 
-def test_peek_2():
-    test_lists = deepcopy(global_test_lists)
-    print(test_lists)
-    for i in range(list_len):
-        test_list = test_lists[i]
-        expected_word = test_types[i]
-        assert_equal(peek(test_list), expected_word)
+    #only first element affected
+    test_object_2 = scan("go to north")
+    skip(test_object_2, "stop")
+    assert_equal(test_object_2, scan("go to north"))
 
-
-def test_match_2():
-    test_lists = deepcopy(global_test_lists)
-    print(test_lists[0][0][0], test_lists[1])
-    for i in range(list_len):
-        test_list = test_lists[i]
-        test_type = test_types[i]
-        if len(test_list) > 0:
-            expected_word = test_list[0]
-        else:
-            None
-        assert_equal(match(test_list, test_type), expected_word)
-
-
-def test_skip_2():
-    test_lists = deepcopy(global_test_lists)
-    expected_lists1 = [
-        scan("south"),
-        scan("door"),
-        scan("go"),
-        [],
-        scan("234"),
-        scan("error123"),
-        scan("east door"),
-        scan("go to east"),
-        scan("bear go to the door"),
-        scan("princess kill 10 bears"),
-        [],
-    ]
-
-    for i in range(list_len):
-        test_list = test_lists[i]
-        expected_list = expected_lists1[i]
-        skip(test_list, "stop")
-        assert_equal(test_list, expected_list)
-
-    test_list2 = [("error", "error123")]
-    expected_list2 = []
-    skip(test_list2, "error")
-    assert_equal(test_list2, expected_list2)
+    #other types of words affected
+    test_object_3 = scan("go to north")
+    skip(test_object_3, "verb")
+    assert_equal(test_object_3, scan("to north"))
 
 
 def test_parse_verb():
-    """ test parse_verb function """
-    test_lists_good = [scan("go"), scan("go to east"), scan("to error123 eat")]
+    #test to find "verb"
+    test_object_0 = scan("go north")
+    assert_equal(parse_verb(test_object_0), *scan("go"))
 
-    expected_lists = [scan("go"), scan("go"), scan("eat")]
+    #test to skip "stop" and find "verb"
+    test_object_1 = scan("to go north")
+    assert_equal(parse_verb(test_object_1), *scan("go"))
 
-    for i in range(len(test_lists_good)):
-        test_list = test_lists_good[i]
-        expected_list = expected_lists[i]
-        assert_equal(parse_verb(test_list), *expected_list)
+    #rise error if "verb" not found
+    test_object_2 = scan("to north")
+    assert_raises(ParserError, parse_verb, test_object_2)
 
-    # test bad situations
-    test_lists_bad = [
-        scan("south"),
-        scan("door"),
-        scan("234"),
-        scan("east door"),
-        scan("error123"),
-        scan("to"),
-        scan("bear go to the door"),
-        scan("the princess kill 10 bear"),
-        [],
-    ]
-    for i in range(len(test_lists_bad)):
-        test_list = test_lists_bad[i]
-        assert_raises(ParserError, parse_verb, test_list)
+
+def test_parse_object():
+    #test to find "noun"
+    test_object_0 = scan("bear go")
+    assert_equal(parse_object(test_object_0), *scan("bear"))
+
+    #test to find "direction"
+    test_object_1 = scan("north bear")
+    assert_equal(parse_object(test_object_1), *scan("north"))
+
+    #test to "skip" "stop" word
+    test_object_2 = scan("to bear")
+    assert_equal(parse_object(test_object_2), *scan("bear"))
+
+    #test to raise and error
+    test_object_3 = scan("to go")
+    assert_raises(ParserError, parse_object, test_object_3)
+
+
+def test_parse_subject():
+    test_object_0 = scan("go bear")
+    subj = match(scan("princess"), "noun")
+    print(subj)
+    a = parse_subject(test_object_0, subj)
+    assert_equal(a.subject, ("princess"))
+    assert_equal(a.verb, ("go"))
+    assert_equal(a.object, ("bear"))
+
+
+def test_parse_sentence():
+    #if "noun", "verb", "object"
+    test_object_0 = scan("bear go north")
+    a = parse_sentence(test_object_0)
+    assert_equal(a.subject, ("bear"))
+    assert_equal(a.verb, ("go"))
+    assert_equal(a.object, ("north"))
+
+    #if "verb", "object"
+    test_object_1 = scan("go north")
+    b = parse_sentence(test_object_1)
+    assert_equal(b.subject, ("player"))
+    assert_equal(b.verb, ("go"))
+    assert_equal(b.object, ("north"))
+
+    #if "stop", "verb", "object"
+    test_object_2 = scan("to go north")
+    c = parse_sentence(test_object_2)
+    assert_equal(c.subject, ("player"))
+    assert_equal(c.verb, ("go"))
+    assert_equal(c.object, ("north"))
+
+    #if "stop", "noun", "verb", "object"
+    test_object_3 = scan("to door go north")
+    d = parse_sentence(test_object_3)
+    assert_equal(d.subject, ("door"))
+    assert_equal(d.verb, ("go"))
+    assert_equal(d.object, ("north"))
+
+    #if "error"
+    test_object_4 = scan("asd door go north")
+    assert_raises(ParserError, parse_sentence, test_object_4)

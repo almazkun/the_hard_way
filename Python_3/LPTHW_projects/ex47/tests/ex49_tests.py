@@ -109,5 +109,5 @@ def test_parse_sentence():
     assert_equal(d.object, ("north"))
 
     #if "error"
-    test_object_4 = scan("asd door go north")
+    test_object_4 = scan("tos door go north")
     assert_raises(ParserError, parse_sentence, test_object_4)

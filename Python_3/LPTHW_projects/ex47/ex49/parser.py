@@ -59,7 +59,6 @@ def parse_object(word_list):
 def parse_subject(word_list, subj):
     verb = parse_verb(word_list)
     obj = parse_object(word_list)
-    
 
     return Sentence(subj, verb, obj)
 

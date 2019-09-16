@@ -1,5 +1,9 @@
-from django.views.generic import TemplateView
+from django.views.generic.edit import CreateView
+
+from .models import Name
 
 
-class HomepageView(TemplateView):
+class HomepageView(CreateView):
+    model = Name
     template_name = "home.html"
+    fields = ["name"]

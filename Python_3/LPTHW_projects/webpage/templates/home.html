@@ -1,1 +1,16 @@
-<h1>Homepage</h1>
+{% extends "base.html" %}
+
+
+{% block content %}
+    <div class="jumbotron">
+        {% for name in context %}
+            <h2>{{ name.name }}</h2>
+        {% endfor %}
+
+        <from method="POST">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <input type="submit" value="Save"/>
+        </from>
+    </div>
+{% endblock content %}

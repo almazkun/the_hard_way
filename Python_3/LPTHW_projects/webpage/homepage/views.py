@@ -6,5 +6,4 @@ def greeting(request):
     if "name" in request.GET:
         name["name"] = request.GET["name"]
 
-
     return render(request, "home.html", name)

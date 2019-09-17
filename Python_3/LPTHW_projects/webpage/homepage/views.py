@@ -7,3 +7,8 @@ def greeting(request):
         name["name"] = request.GET["name"]
 
     return render(request, "home.html", name)
+
+
+def game(request):
+    return render(request, "game.html")
+

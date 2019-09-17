@@ -6,9 +6,9 @@
         {% if name != "unknown" %}
         <h2 class="display-4">Good day, dear <strong>{{ name }}</strong>!</h2>
         <p class="lead">Wish to play a little game?</p>
-        <a href="https://google.com"><button class="btn btn-danger">GO!</button></a>
+        <a href="{% url 'game' %}"><button class="btn btn-danger">GO!</button></a>
         {% else %}
-        <h2>Please, enter your name first:</h2>
+        <h2 class="display-4">Please, enter your name first:</h2>
         <form class="form-inline" method="GET">
             {% csrf_token %}
             <input class="form-control" type="text" name="name">

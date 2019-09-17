@@ -1,9 +1,10 @@
-from django.views.generic.edit import CreateView
-
-from .models import Name
+from django.shortcuts import render
 
 
-class HomepageView(CreateView):
-    model = Name
-    template_name = "home.html"
-    fields = ["name"]
+def greeting(request):
+    name = {"name": "unknown"}
+    if "name" in request.GET:
+        name["name"] = request.GET["name"]
+
+
+    return render(request, "home.html", name)

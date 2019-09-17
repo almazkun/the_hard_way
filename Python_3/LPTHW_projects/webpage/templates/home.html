@@ -3,14 +3,17 @@
 
 {% block content %}
     <div class="jumbotron">
-        {% for name in context %}
-            <h2>{{ name.name }}</h2>
-        {% endfor %}
-
-        <from method="POST">
+        {% if name != "unknown" %}
+        <h2 class="display-4">Good day, dear <strong>{{ name }}</strong>!</h2>
+        <p class="lead">Wish to play a little game?</p>
+        <a href="https://google.com"><button class="btn btn-danger">GO!</button></a>
+        {% else %}
+        <h2>Please, enter your name first:</h2>
+        <form class="form-inline" method="GET">
             {% csrf_token %}
-            {{ form.as_p }}
-            <input type="submit" value="Save"/>
-        </from>
+            <input class="form-control" type="text" name="name">
+            <button class="btn btn-primary mx-1" type="submit">Enter</button>
+        </form>
+        {% endif %}
     </div>
 {% endblock content %}
